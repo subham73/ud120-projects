@@ -31,10 +31,24 @@ plt.show()
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
 
+from time import time 
+from sklearn.metrics import accuracy_score
+from sklearn.ensemble import AdaBoostClassifier
+clf = AdaBoostClassifier(learning_rate = 0.5 ,n_estimators = 24)
+
+t0 = time()
+clf = clf.fit( features_train , labels_train )
+print "Training time : " , round(time()-t0,3) , "s"
+
+t0 = time()
+pred = clf.predict( features_test )
+print "Prediction time : " , round(time()-t0,3) , "s" 
 
 
-
-
+t0 = time()
+acc = accuracy_score( pred , labels_test )
+print "Accuracy time :  " , round(time()-t0,3) , "s"
+print "Accuracy :" , acc 
 
 
 
@@ -42,3 +56,19 @@ try:
     prettyPicture(clf, features_test, labels_test)
 except NameError:
     pass
+
+
+#performance to beat: 93.6
+#-------------------
+#Till Now Best : 0.928 
+    #parameter (learning_rate =1 , n_estimators = 20  )
+#no parameters : 0.924
+#learning rate
+                # learning_rate =100 : 0.336
+                # learning_rate =50  : 0.664
+                # learning_rate =2   : 0.92
+                # learning_rate =5   : 0.764
+                # learning_rate =0.8  : 0.924
+                # learning_rate =0.1 : 0.916
+    #result : max at :1
+#
